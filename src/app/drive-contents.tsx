@@ -1,11 +1,11 @@
 "use client";
 
 import { ChevronRight, Upload } from "lucide-react";
-import { useMemo, useState } from "react";
 
 import { Button } from "~/components/ui/button";
 import { FileRow, FolderRow } from "./file-row";
 
+import Link from "next/link";
 import type {
   files as filesSchema,
   folders as foldersSchema,
@@ -18,28 +18,7 @@ export default function DriveContents({
   files: (typeof filesSchema.$inferSelect)[];
   folders: (typeof foldersSchema.$inferSelect)[];
 }) {
-  const [currentFolder, setCurrentFolder] = useState<number>(1);
-
-  const handleFolderClick = (folderId: number) => {
-    setCurrentFolder(folderId);
-  };
-
-  const breadcrumbs = useMemo(() => {
-    const breadcrumbs = [];
-    let currentId = currentFolder;
-
-    while (currentId !== 1) {
-      const folder = folders.find((folder) => folder.id === currentId);
-      if (folder) {
-        breadcrumbs.unshift(folder);
-        currentId = folder.parent ?? 1;
-      } else {
-        break;
-      }
-    }
-
-    return breadcrumbs;
-  }, [currentFolder, folders]);
+  const breadcrumbs: unknown[] = [];
 
   const handleUpload = () => {
     alert("Upload functionality would be implemented here");
@@ -50,23 +29,18 @@ export default function DriveContents({
       <div className="mx-auto max-w-6xl">
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center">
-            <Button
-              onClick={() => setCurrentFolder(1)}
-              variant="ghost"
-              className="mr-2 text-gray-300 hover:text-white"
-            >
+            <Link href="/f/1" className="mr-2 text-gray-300 hover:text-white">
               My Drive
-            </Button>
+            </Link>
             {breadcrumbs.map((folder, index) => (
               <div key={folder.id} className="flex items-center">
                 <ChevronRight className="mx-2 text-gray-500" size={16} />
-                <Button
-                  onClick={() => handleFolderClick(folder.id)}
-                  variant="ghost"
+                <Link
+                  href={`/f/${folder.id}`}
                   className="text-gray-300 hover:text-white"
                 >
                   {folder.name}
-                </Button>
+                </Link>
               </div>
             ))}
           </div>
@@ -88,11 +62,7 @@ export default function DriveContents({
           </div>
           <ul>
             {folders.map((folder) => (
-              <FolderRow
-                key={folder.id}
-                folder={folder}
-                handleFolderClick={() => handleFolderClick(folder.id)}
-              />
+              <FolderRow key={folder.id} folder={folder} />
             ))}
             {files.map((file) => (
               <FileRow key={file.id} file={file} />
