@@ -14,12 +14,12 @@ import type {
 export default function DriveContents({
   files,
   folders,
+  parents,
 }: {
   files: (typeof filesSchema.$inferSelect)[];
   folders: (typeof foldersSchema.$inferSelect)[];
+  parents: (typeof foldersSchema.$inferSelect)[];
 }) {
-  const breadcrumbs: unknown[] = [];
-
   const handleUpload = () => {
     alert("Upload functionality would be implemented here");
   };
@@ -32,7 +32,7 @@ export default function DriveContents({
             <Link href="/f/1" className="mr-2 text-gray-300 hover:text-white">
               My Drive
             </Link>
-            {breadcrumbs.map((folder, index) => (
+            {parents.map((folder) => (
               <div key={folder.id} className="flex items-center">
                 <ChevronRight className="mx-2 text-gray-500" size={16} />
                 <Link
