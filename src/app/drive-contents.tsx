@@ -7,7 +7,7 @@ import { FileRow, FolderRow } from "./file-row";
 
 import Link from "next/link";
 import type {
-  files as filesSchema,
+  files_table as filesSchema,
   folders as foldersSchema,
 } from "~/server/db/schema";
 

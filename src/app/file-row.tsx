@@ -1,8 +1,8 @@
 import { File as FileIcon, Folder as FolderIcon } from "lucide-react";
 import Link from "next/link";
-import type { files, folders } from "~/server/db/schema";
+import type { files_table, folders } from "~/server/db/schema";
 
-export function FileRow({ file }: { file: typeof files.$inferSelect }) {
+export function FileRow({ file }: { file: typeof files_table.$inferSelect }) {
   return (
     <li
       key={file.id}
