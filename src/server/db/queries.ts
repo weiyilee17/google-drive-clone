@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 import { db } from "~/server/db";
 import {
   files_table as filesSchema,
-  folders as foldersSchema,
+  folders_table as foldersSchema,
 } from "~/server/db/schema";
 
 export const QUERIES = {
@@ -40,5 +40,21 @@ export const QUERIES = {
       .select()
       .from(filesSchema)
       .where(eq(filesSchema.parent, folderId));
+  },
+};
+
+export const MUTATIONS = {
+  createFile: async (input: {
+    file: {
+      name: string;
+      size: number;
+      url: string;
+    };
+    userId: string;
+  }) => {
+    return await db.insert(filesSchema).values({
+      ...input.file,
+      parent: 1,
+    });
   },
 };
