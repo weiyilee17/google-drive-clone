@@ -9,4 +9,10 @@
 - [x] Add analytics
 - [x] Make sure sort order is consistent
 - [ ] Real homepage + onboarding
-- [ ] Delete files button
+- [x] Delete files button
+
+## Follow ups
+
+### Folder deletion
+
+Make sure you fetch all of the folders that has it as a parent, and their children too
