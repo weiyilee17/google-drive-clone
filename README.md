@@ -14,6 +14,6 @@
 - [x] Clean up the database and data fetching patterns
 - [x] Upload files to the right folder
 - [ ] Delete files button
-- [ ] Allow files that aren't images to be uploaded
+- [x] Allow files that aren't images to be uploaded
 - [x] Add "ownership" to files and folders
 - [ ] Real homepage
