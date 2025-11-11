@@ -7,13 +7,5 @@
 - [x] Add auth
 - [x] Add file uploading
 - [ ] Add analytics
-
-## 2025-10-27
-
-- [x] Change folders to link components, remove all client state
-- [x] Clean up the database and data fetching patterns
-- [x] Upload files to the right folder
+- [ ] Real homepage + onboarding
 - [ ] Delete files button
-- [x] Allow files that aren't images to be uploaded
-- [x] Add "ownership" to files and folders
-- [ ] Real homepage
