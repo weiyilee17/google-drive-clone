@@ -12,8 +12,8 @@
 
 - [x] Change folders to link components, remove all client state
 - [x] Clean up the database and data fetching patterns
-- [ ] Upload files to the right folder
+- [x] Upload files to the right folder
 - [ ] Delete files button
 - [ ] Allow files that aren't images to be uploaded
-
+- [x] Add "ownership" to files and folders
 - [ ] Real homepage

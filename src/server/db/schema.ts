@@ -1,11 +1,9 @@
-import "server-only";
-
 import {
   bigint,
   index,
-  int,
   singlestoreTableCreator,
   text,
+  timestamp,
 } from "drizzle-orm/singlestore-core";
 
 export const createTable = singlestoreTableCreator(
@@ -18,12 +16,17 @@ export const files_table = createTable(
     id: bigint("id", { mode: "number", unsigned: true })
       .primaryKey()
       .autoincrement(),
+    ownerId: text("owner_id").notNull(),
     name: text("name").notNull(),
     size: bigint("size", { mode: "number", unsigned: true }).notNull(),
     url: text("url").notNull(),
     parent: bigint("parent", { mode: "number", unsigned: true }).notNull(),
+    created_at: timestamp("created_at").notNull().defaultNow(),
   },
-  (t) => [index("parent_index").on(t.parent)],
+  (t) => [
+    index("parent_index").on(t.parent),
+    index("owner_id_index").on(t.ownerId),
+  ],
 );
 
 export const folders_table = createTable(
@@ -32,10 +35,15 @@ export const folders_table = createTable(
     id: bigint("id", { mode: "number", unsigned: true })
       .primaryKey()
       .autoincrement(),
+    ownerId: text("owner_id").notNull(),
     name: text("name").notNull(),
-    parent: int("parent"),
+    parent: bigint("parent", { mode: "number", unsigned: true }),
+    created_at: timestamp("created_at").notNull().defaultNow(),
   },
-  (t) => [index("parent_index").on(t.parent)],
+  (t) => [
+    index("parent_index").on(t.parent),
+    index("owner_id_index").on(t.ownerId),
+  ],
 );
 
 export type DB_FileType = typeof files_table.$inferSelect;
